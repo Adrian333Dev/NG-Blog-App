@@ -1,1 +1,24 @@
-<p>Sign Up!</p>
+<div class="auth-page">
+  <div class="container">
+    <div class="row">
+      <div class="form-wrapper col-12 col-md-6 mx-auto">
+        <h1 class="text-center mb-4">Sign Up</h1>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="username" placeholder="John Doe" formControlName="username">
+            <label for="username">Username</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="email" placeholder="johndoe@example.com"
+              formControlName="email">
+            <label for="email">Email</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="password" class="form-control" id="password" placeholder="Password" formControlName="password">
+            <label for="password">Password</label>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
