@@ -7,3 +7,16 @@ body {
   margin: 0;
   padding: 0;
 }
+
+@mixin make-container($padding-x: $container-padding-x) {
+  width: 100%;
+  max-width: 500px;
+  padding-right: $padding-x;
+  padding-left: $padding-x;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.auth-container {
+  @include make-container();
+}

@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { BootstrapModule } from './shared/modules/bootstrap.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   standalone: true,
-  imports: [RouterOutlet, BootstrapModule],
+  imports: [RouterOutlet, NgbModule],
 })
 export class AppComponent {}

@@ -1,30 +1,39 @@
-import { Component } from '@angular/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BootstrapModule } from 'src/app/shared/modules/bootstrap.module';
+import { RouterLink } from '@angular/router';
 import {
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { Store } from '@ngrx/store';
+
+import { authActions } from '@auth/store/actions';
+import { selectIsSubmitting } from '@auth/store/reducers';
 
 @Component({
   selector: 'app-sign-up',
   standalone: true,
-  imports: [CommonModule, BootstrapModule, ReactiveFormsModule],
+  imports: [CommonModule, NgbModule, ReactiveFormsModule, RouterLink],
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss'],
 })
 export class SignUpComponent {
-  form: FormGroup = this.fb.group({
+  fb = inject(FormBuilder);
+  store = inject(Store);
+
+  form: FormGroup = this.fb.nonNullable.group({
     username: ['', Validators.required],
     email: ['', Validators.required],
     password: ['', Validators.required],
   });
-
-  constructor(private readonly fb: FormBuilder) {}
+  isSubmitting$ = this.store.select(selectIsSubmitting);
 
   onSubmit(): void {
-    console.log(this.form.value);
+    console.log(this.form.getRawValue());
+    const payload = { user: this.form.getRawValue() };
+    this.store.dispatch(authActions.signUp(payload));
   }
 }
