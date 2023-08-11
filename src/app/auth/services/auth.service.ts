@@ -18,6 +18,6 @@ export class AuthService {
   signUp(payload: ISignUpRequest): Observable<ICurrentUser> {
     return this.http
       .post<IAuthResponse>(`${this.apiUrl}`, payload)
-      .pipe(map((res) => res.currentUser));
+      .pipe(map((res) => res.user));
   }
 }

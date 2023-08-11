@@ -18,10 +18,10 @@ const authFeature = createFeature({
       isSubmitting: true,
       validationErrors: null,
     })),
-    on(authActions.signUpSuccess, (state, { currentUser }) => ({
+    on(authActions.signUpSuccess, (state, { user }) => ({
       ...state,
       isSubmitting: false,
-      currentUser,
+      currentUser: user,
     })),
     on(authActions.signUpFailure, (state, { errors }) => ({
       ...state,

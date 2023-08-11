@@ -19,7 +19,7 @@ export class AuthEffects {
       ofType(authActions.signUp),
       switchMap((req) =>
         this.authService.signUp(req).pipe(
-          map((currentUser) => authActions.signUpSuccess({ currentUser })),
+          map((user) => authActions.signUpSuccess({ user })),
           catchError(({ error: { errors } }: HttpErrorResponse) =>
             of(authActions.signUpFailure({ errors }))
           )
