@@ -11,12 +11,17 @@ import {
 import { Store } from '@ngrx/store';
 
 import { authActions } from '@auth/store/actions';
-import { selectIsSubmitting } from '@auth/store/reducers';
+import {
+  selectIsSubmitting,
+  selectValidationErrors,
+} from '@auth/store/reducers';
+import { combineLatest } from 'rxjs';
+import { ServerErrorMessagesComponent } from '@shared/components/server-error-messages/server-error-messages.component';
 
 @Component({
   selector: 'app-sign-up',
   standalone: true,
-  imports: [CommonModule, NgbModule, ReactiveFormsModule, RouterLink],
+  imports: [CommonModule, NgbModule, ReactiveFormsModule, RouterLink, ServerErrorMessagesComponent],
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss'],
 })
@@ -29,7 +34,11 @@ export class SignUpComponent {
     email: ['', Validators.required],
     password: ['', Validators.required],
   });
-  isSubmitting$ = this.store.select(selectIsSubmitting);
+
+  data$ = combineLatest({
+    isSubmitting: this.store.select(selectIsSubmitting),
+    validationErrors: this.store.select(selectValidationErrors),
+  });
 
   onSubmit(): void {
     console.log(this.form.getRawValue());
