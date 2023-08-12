@@ -16,7 +16,7 @@ import {
   selectValidationErrors,
 } from '@auth/store/reducers';
 import { combineLatest } from 'rxjs';
-import { ServerErrorMessagesComponent } from '@shared/components/server-error-messages/server-error-messages.component';
+import { ServerErrorMessagesComponent } from '@shared/components';
 
 @Component({
   selector: 'app-sign-in',

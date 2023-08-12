@@ -1,0 +1,27 @@
+<ng-container *ngIf="data$ | async as data">
+  <header class="py-2 text-bg-dark shadow">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a routerLink="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+          <h3>Logo</h3>
+        </a>
+
+        <ul class="nav col-12 col-lg-auto ms-lg-auto mb-2 justify-content-center mb-md-0">
+          <li><a routerLink="/" class="nav-link px-2 text-secondary">Home</a></li>
+          <ng-container *ngIf="data.currentUser">
+            <li><a routerLink="/articles/new" class="nav-link px-2 text-white">New Article</a></li>
+            <li><a routerLink="/settings" class="nav-link px-2 text-white">Settings</a></li>
+            <li>
+              <a [routerLink]="['/profile', data.currentUser.username]" class="nav-link px-2 text-white">
+                {{ data.currentUser.username }}</a>
+            </li>
+          </ng-container>
+          <ng-container *ngIf="!data.currentUser">
+            <li><a routerLink="/login" class="nav-link px-2 text-white">Sign in</a></li>
+            <li><a routerLink="/register" class="nav-link px-2 text-white">Sign up</a></li>
+          </ng-container>
+        </ul>
+      </div>
+    </div>
+  </header>
+</ng-container>

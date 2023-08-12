@@ -21,6 +21,11 @@ body {
   @include make-container();
 }
 
+.app {
+  background-color: rgba(0, 0, 0, 0.2);
+  height: 100%;
+}
+
 .auth-page {
   display: flex;
   justify-content: center;
