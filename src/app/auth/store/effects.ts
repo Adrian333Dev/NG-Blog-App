@@ -1,25 +1,33 @@
 import { inject, Injectable } from '@angular/core';
-import { map, switchMap, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+import { map, switchMap, of, catchError, tap } from 'rxjs';
+
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 
-import { AuthService } from '@auth/services/auth.service';
+import { AuthService } from '@auth/services';
+import { PersistenceService } from '@shared/service';
 import { authActions } from './actions';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()
 export class AuthEffects {
   actions$ = inject(Actions);
-  authService = inject(AuthService);
   store = inject(Store);
+  router = inject(Router);
+
+  authService = inject(AuthService);
+  persistenceService = inject(PersistenceService);
 
   signUpEffect$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(authActions.signUp),
       switchMap((req) =>
         this.authService.signUp(req).pipe(
-          map((user) => authActions.signUpSuccess({ user })),
+          map((user) => {
+            this.persistenceService.set('accessToken', user.token);
+            return authActions.signUpSuccess({ user });
+          }),
           catchError(({ error: { errors } }: HttpErrorResponse) =>
             of(authActions.signUpFailure({ errors }))
           )
@@ -27,4 +35,13 @@ export class AuthEffects {
       )
     );
   });
+
+  redirectAfterSignUpSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(authActions.signUpSuccess),
+        tap(() => this.router.navigateByUrl('/'))
+      ),
+    { dispatch: false }
+  );
 }
