@@ -29,6 +29,7 @@ const authFeature = createFeature({
       isSubmitting: false,
       validationErrors: errors,
     })),
+
     on(authActions.signIn, (state) => ({
       ...state,
       isSubmitting: true,
@@ -44,9 +45,25 @@ const authFeature = createFeature({
       isSubmitting: false,
       validationErrors: errors,
     })),
+
     on(routerNavigatedAction, (state) => ({
       ...state,
       validationErrors: null,
+    })),
+
+    on(authActions.getCurrentUser, (state) => ({
+      ...state,
+      isLoading: true,
+    })),
+    on(authActions.getCurrentUserSuccess, (state, { user }) => ({
+      ...state,
+      isLoading: false,
+      currentUser: user,
+    })),
+    on(authActions.getCurrentUserFailure, (state) => ({
+      ...state,
+      isLoading: false,
+      currentUser: null,
     }))
   ),
 });

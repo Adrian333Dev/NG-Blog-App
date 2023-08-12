@@ -7,7 +7,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 
 import { AuthService } from '@auth/services';
-import { PersistenceService } from '@shared/service';
+import { PersistenceService } from '@shared/services';
 import { authActions } from './actions';
 
 @Injectable()
@@ -18,6 +18,21 @@ export class AuthEffects {
 
   authService = inject(AuthService);
   persistenceService = inject(PersistenceService);
+
+  getCurrentUserEffect$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(authActions.getCurrentUser),
+      switchMap(() => {
+        const token = this.persistenceService.get('accessToken');
+        return !token
+          ? of(authActions.getCurrentUserFailure())
+          : this.authService.getCurrentUser().pipe(
+              map((user) => authActions.getCurrentUserSuccess({ user })),
+              catchError(() => of(authActions.getCurrentUserFailure()))
+            );
+      })
+    );
+  });
 
   signUpEffect$ = createEffect(() => {
     return this.actions$.pipe(

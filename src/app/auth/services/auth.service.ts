@@ -10,23 +10,31 @@ import {
 } from '@auth/models/interfaces';
 import { ICurrentUser } from '@shared/models/interfaces';
 
+const { apiUrl } = environment;
+
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private readonly apiUrl = `${environment.apiUrl}/users`;
+  private readonly url = `${environment.apiUrl}/users`;
 
   http = inject(HttpClient);
 
+  getCurrentUser(): Observable<ICurrentUser> {
+    return this.http
+      .get<IAuthResponse>(`${apiUrl}/user`)
+      .pipe(map(({ user }) => user));
+  }
+
   signUp(payload: ISignUpRequest): Observable<ICurrentUser> {
     return this.http
-      .post<IAuthResponse>(`${this.apiUrl}`, payload)
+      .post<IAuthResponse>(`${this.url}`, payload)
       .pipe(map(({ user }) => user));
   }
 
   signIn(payload: ISignInRequest): Observable<ICurrentUser> {
     return this.http
-      .post<IAuthResponse>(`${this.apiUrl}/login`, payload)
+      .post<IAuthResponse>(`${this.url}/login`, payload)
       .pipe(map(({ user }) => user));
   }
 }

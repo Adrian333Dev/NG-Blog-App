@@ -1,4 +1,4 @@
-import { createActionGroup, props } from '@ngrx/store';
+import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import {
   IAuthResponse,
   ISignInRequest,
@@ -16,5 +16,9 @@ export const authActions = createActionGroup({
     'Sign In': props<ISignInRequest>(),
     'Sign In Success': props<IAuthResponse>(),
     'Sign In Failure': props<IServerErrorsResponse>(),
+
+    'Get Current User': emptyProps(),
+    'Get Current User Success': props<IAuthResponse>(),
+    'Get Current User Failure': emptyProps(),
   },
 });
