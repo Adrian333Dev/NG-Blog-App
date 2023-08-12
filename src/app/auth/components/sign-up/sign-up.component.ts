@@ -21,7 +21,13 @@ import { ServerErrorMessagesComponent } from '@shared/components/server-error-me
 @Component({
   selector: 'app-sign-up',
   standalone: true,
-  imports: [CommonModule, NgbModule, ReactiveFormsModule, RouterLink, ServerErrorMessagesComponent],
+  imports: [
+    CommonModule,
+    NgbModule,
+    ReactiveFormsModule,
+    RouterLink,
+    ServerErrorMessagesComponent,
+  ],
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss'],
 })

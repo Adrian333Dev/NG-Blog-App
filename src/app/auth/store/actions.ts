@@ -1,5 +1,9 @@
 import { createActionGroup, props } from '@ngrx/store';
-import { IAuthResponse, ISignUpRequest } from '@auth/models/interfaces';
+import {
+  IAuthResponse,
+  ISignInRequest,
+  ISignUpRequest,
+} from '@auth/models/interfaces';
 import { IServerErrorsResponse } from '@shared/models/interfaces';
 
 export const authActions = createActionGroup({
@@ -8,5 +12,9 @@ export const authActions = createActionGroup({
     'Sign Up': props<ISignUpRequest>(),
     'Sign Up Success': props<IAuthResponse>(),
     'Sign Up Failure': props<IServerErrorsResponse>(),
+
+    'Sign In': props<ISignInRequest>(),
+    'Sign In Success': props<IAuthResponse>(),
+    'Sign In Failure': props<IServerErrorsResponse>(),
   },
 });

@@ -1,1 +1,23 @@
-<p>sign-in works!</p>
+<ng-container *ngIf="data$ | async as data">
+  <div class="auth-page">
+    <div class="auth-container">
+      <app-server-error-messages *ngIf="data.validationErrors"
+        [errors]="data.validationErrors"></app-server-error-messages>
+      <div class="sign-in-form">
+        <h1 class="text-center mb-4">Sign In</h1>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="email" placeholder="johndoe@example.com"
+              formControlName="email">
+            <label for="email">Email</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="password" class="form-control" id="password" placeholder="Password" formControlName="password">
+            <label for="password">Password</label>
+          </div>
+          <button class="btn btn-lg btn-primary w-100" type="submit" [disabled]="data.isSubmitting">Sign In</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</ng-container>

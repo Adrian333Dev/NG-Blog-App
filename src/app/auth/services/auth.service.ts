@@ -3,8 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
 import { environment } from 'src/environments/environment.development';
-
-import { IAuthResponse, ISignUpRequest } from '@auth/models/interfaces';
+import {
+  IAuthResponse,
+  ISignInRequest,
+  ISignUpRequest,
+} from '@auth/models/interfaces';
 import { ICurrentUser } from '@shared/models/interfaces';
 
 @Injectable({
@@ -18,6 +21,12 @@ export class AuthService {
   signUp(payload: ISignUpRequest): Observable<ICurrentUser> {
     return this.http
       .post<IAuthResponse>(`${this.apiUrl}`, payload)
-      .pipe(map((res) => res.user));
+      .pipe(map(({ user }) => user));
+  }
+
+  signIn(payload: ISignInRequest): Observable<ICurrentUser> {
+    return this.http
+      .post<IAuthResponse>(`${this.apiUrl}/login`, payload)
+      .pipe(map(({ user }) => user));
   }
 }

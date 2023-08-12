@@ -36,10 +36,36 @@ export class AuthEffects {
     );
   });
 
+  signInEffect$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(authActions.signIn),
+      switchMap((req) =>
+        this.authService.signIn(req).pipe(
+          map((user) => {
+            this.persistenceService.set('accessToken', user.token);
+            return authActions.signInSuccess({ user });
+          }),
+          catchError(({ error: { errors } }: HttpErrorResponse) =>
+            of(authActions.signInFailure({ errors }))
+          )
+        )
+      )
+    );
+  });
+
   redirectAfterSignUpSuccess$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(authActions.signUpSuccess),
+        tap(() => this.router.navigateByUrl('/'))
+      ),
+    { dispatch: false }
+  );
+
+  redirectAfterSignInSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(authActions.signInSuccess),
         tap(() => this.router.navigateByUrl('/'))
       ),
     { dispatch: false }
