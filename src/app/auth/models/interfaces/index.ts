@@ -1,4 +1,4 @@
 export * from './auth-state.interface';
-export * from './auth-res.interface';
-export * from './sign-up-req.interface';
-export * from './sign-up-form.interface';
+export * from './auth-responses.interface';
+export * from './auth-requests.interface';
+export * from './auth-forms.interface';
