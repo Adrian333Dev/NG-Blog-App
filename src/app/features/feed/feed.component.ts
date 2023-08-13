@@ -6,9 +6,11 @@ import { Store } from '@ngrx/store';
 
 import { feedActions } from './store/actions';
 import { selectError, selectFeedData, selectIsLoading } from './store/reducers';
-import { ArticleListComponent } from '../article-list/article-list.component';
-import { LoaderPageComponent } from '../loader-page/loader-page.component';
-import { ErrorMessageComponent } from '../error-message/error-message.component';
+import {
+  ArticleListComponent,
+  ErrorMessageComponent,
+  LoaderPageComponent,
+} from '@shared/components';
 
 @Component({
   selector: 'app-feed',

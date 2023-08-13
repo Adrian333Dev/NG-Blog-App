@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FeedComponent, BannerComponent } from '@shared/components';
+import { BannerComponent } from '@shared/components';
+import { FeedComponent } from '@/features/feed/feed.component';
 
 @Component({
   selector: 'app-global-feed',

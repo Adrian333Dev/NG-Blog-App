@@ -8,7 +8,7 @@ export const appRoutes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('./global-feed/global-feed.routes').then(
+      import('./features/global-feed/global-feed.routes').then(
         (m) => m.globalFeedRoutes
       ),
   },

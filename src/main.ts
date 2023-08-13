@@ -16,12 +16,8 @@ import { appRoutes } from '@/app.routes';
 import { authFeatureKey, authReducer } from '@auth/store/reducers';
 import { AuthEffects } from '@auth/store/effects';
 import { authInterceptor } from '@auth/interceptors';
-
-import { FeedEffects } from '@shared/components/feed/store/effects';
-import {
-  feedFeatureKey,
-  feedReducer,
-} from '@shared/components/feed/store/reducers';
+import { FeedEffects } from '@/features/feed/store/effects';
+import { feedFeatureKey, feedReducer } from '@/features/feed/store/reducers';
 
 bootstrapApplication(AppComponent, {
   providers: [
