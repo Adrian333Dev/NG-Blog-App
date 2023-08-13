@@ -6,7 +6,7 @@ export const appRoutes: Routes = [
     loadChildren: () => import('./auth/auth.routes').then((m) => m.authRoutes),
   },
   {
-    path: 'global-feed',
+    path: '',
     loadChildren: () =>
       import('./global-feed/global-feed.routes').then(
         (m) => m.globalFeedRoutes
