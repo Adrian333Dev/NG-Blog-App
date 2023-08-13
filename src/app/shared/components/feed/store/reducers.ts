@@ -26,7 +26,7 @@ const feedFeature = createFeature({
       data,
     })),
     on(feedActions.getFeedFailure, (state) => ({
-      ...state,git 
+      ...state,
       isLoading: false,
       error: 'Error loading feed',
       data: null,

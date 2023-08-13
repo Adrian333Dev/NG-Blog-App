@@ -8,14 +8,20 @@ import { provideRouter } from '@angular/router';
 import { provideState, provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { provideRouterStore, routerReducer } from '@ngrx/router-store';
 
 import { AppComponent } from '@/app.component';
 import { appRoutes } from '@/app.routes';
 
 import { authFeatureKey, authReducer } from '@auth/store/reducers';
 import { AuthEffects } from '@auth/store/effects';
-import { provideRouterStore, routerReducer } from '@ngrx/router-store';
 import { authInterceptor } from '@auth/interceptors';
+
+import { FeedEffects } from '@shared/components/feed/store/effects';
+import {
+  feedFeatureKey,
+  feedReducer,
+} from '@shared/components/feed/store/reducers';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -23,8 +29,9 @@ bootstrapApplication(AppComponent, {
     provideRouter(appRoutes),
     provideStore({ router: routerReducer }),
     provideRouterStore(),
-    provideEffects(AuthEffects),
+    provideEffects([AuthEffects, FeedEffects]),
     provideState(authFeatureKey, authReducer),
+    provideState(feedFeatureKey, feedReducer),
     provideStoreDevtools({
       maxAge: 25,
       logOnly: !isDevMode(),

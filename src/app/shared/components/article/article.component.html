@@ -1,0 +1,37 @@
+<div class="article-preview">
+  <div class="article-meta">
+    <a [routerLink]="['/profile', article.author.username]">
+      <img [src]="article.author.image" />
+    </a>
+    <div class="info">
+      <a [routerLink]="['/profile', article.author.username]" class="author">
+        {{ article.author.username }}
+      </a>
+      <span class="date">{{ article.createdAt | date: 'medium' }}</span>
+    </div>
+    <!-- <button *ngIf="article.author.username === (user$ | async)?.username"
+          class="btn btn-outline-primary btn-sm pull-xs-right" (click)="deleteArticle(article.slug)">
+          <i class="ion-trash-a"></i> Delete Article
+        </button> -->
+    <div class="actions">
+      <button *ngIf="true" class="btn btn-outline-primary btn-sm pull-xs-right me-2">
+        <i class="ion-heart"></i> Favorite Post <span class="counter">({{ article.favoritesCount }})</span>
+      </button>
+      <button *ngIf="true" class="btn btn-outline-danger btn-sm pull-xs-right">
+        <i class="ion-trash-a"></i> Delete Article
+      </button>
+    </div>
+  </div>
+  <a [routerLink]="['/article', article.slug]" class="preview-link">
+    <h1>{{ article.title }}</h1>
+    <p>{{ article.description }}</p>
+    <div class="d-flex justify-content-between">
+      <span>Read more...</span>
+      <ul class="tag-list">
+        <li *ngFor="let tag of article.tagList" class="badge rounded-pill border text-primary">
+          {{ tag }}
+        </li>
+      </ul>
+    </div>
+  </a>
+</div>

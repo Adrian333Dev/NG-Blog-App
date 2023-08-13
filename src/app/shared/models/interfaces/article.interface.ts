@@ -1,3 +1,5 @@
+import { IProfile } from './profile.interface';
+
 export interface IArticle {
   body: string;
   createdAt: string;
@@ -8,4 +10,5 @@ export interface IArticle {
   tagList: string[];
   title: string;
   updatedAt: string;
+  author: IProfile;
 }
