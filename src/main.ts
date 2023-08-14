@@ -18,10 +18,11 @@ import { AuthEffects } from '@auth/store/effects';
 import { authInterceptor } from '@auth/interceptors';
 import { FeedEffects } from '@/features/feed/store/effects';
 import { feedFeatureKey, feedReducer } from '@/features/feed/store/reducers';
+import { apiInterceptor } from '@shared/interceptors';
 
 bootstrapApplication(AppComponent, {
   providers: [
-    provideHttpClient(withInterceptors([authInterceptor])),
+    provideHttpClient(withInterceptors([authInterceptor, apiInterceptor])),
     provideRouter(appRoutes),
     provideStore({ router: routerReducer }),
     provideRouterStore(),

@@ -29,7 +29,7 @@
     <p class="article-desc">{{ article.description | ellipsis: 300 }}</p>
     <div class="d-flex justify-content-between">
       <span>Read more...</span>
-      <app-article-tags-list [tags]="article.tagList"></app-article-tags-list>
+      <app-article-tags [tags]="article.tagList"></app-article-tags>
     </div>
   </a>
 </div>
