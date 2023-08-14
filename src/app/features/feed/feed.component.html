@@ -2,4 +2,7 @@
   <app-loader-page *ngIf="data.isLoading"></app-loader-page>
   <app-error-message *ngIf="data.error" [message]="data.error"></app-error-message>
   <app-article-list *ngIf="data.feed" [articles]="data.feed.articles"></app-article-list>
+  <app-pagination *ngIf="data.feed" [total]="data.feed.articlesCount" [limit]="limit" [currentPage]="currentPage"
+    (pageChange)="onSetPage($event)">
+  </app-pagination>
 </ng-container>

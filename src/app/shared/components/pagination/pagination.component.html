@@ -1,0 +1,9 @@
+<ngb-pagination
+  [collectionSize]="total"
+  [pageSize]="limit"
+  [(page)]="currentPage"
+  [maxSize]="7"
+  [boundaryLinks]="true"
+  (pageChange)="onPageChange($event)"
+  class="d-flex justify-content-center"
+></ngb-pagination>

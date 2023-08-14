@@ -1,13 +1,15 @@
 <div class="article-preview">
   <div class="article-meta">
-    <a [routerLink]="['/profile', article.author.username]">
-      <img [src]="article.author.image" />
-    </a>
     <div class="info">
-      <a [routerLink]="['/profile', article.author.username]" class="author">
-        {{ article.author.username }}
+      <a [routerLink]="['/profile', article.author.username]">
+        <img [src]="article.author.image" class="author-img" />
       </a>
-      <span class="date">{{ article.createdAt | date: 'medium' }}</span>
+      <div class="author-details">
+        <a [routerLink]="['/profile', article.author.username]" class="author">
+          {{ article.author.username }}
+        </a>
+        <span class="date">{{ article.createdAt | date: 'medium' }}</span>
+      </div>
     </div>
     <!-- <button *ngIf="article.author.username === (user$ | async)?.username"
           class="btn btn-outline-primary btn-sm pull-xs-right" (click)="deleteArticle(article.slug)">
@@ -23,8 +25,8 @@
     </div>
   </div>
   <a [routerLink]="['/article', article.slug]" class="preview-link">
-    <h1>{{ article.title }}</h1>
-    <p>{{ article.description }}</p>
+    <h1 class="article-title">{{ article.title | ellipsis: 120 }}</h1>
+    <p class="article-desc">{{ article.description | ellipsis: 300 }}</p>
     <div class="d-flex justify-content-between">
       <span>Read more...</span>
       <ul class="tag-list">
