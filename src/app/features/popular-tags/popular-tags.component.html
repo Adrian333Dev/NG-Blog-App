@@ -1,0 +1,15 @@
+<ng-container *ngIf="data$ | async as data">
+  <app-loader-page *ngIf="data.isLoading"></app-loader-page>
+  <app-error-message *ngIf="data.error" [message]="data.error"></app-error-message>
+  <!-- Popular tags list -->
+  <div *ngIf="!data.isLoading && !data.error" class="card">
+    <div class="card-header">
+      Popular Tags
+    </div>
+    <div class="card-body">
+      <a *ngFor="let tag of data.tags" class="btn btn-outline-info tag" [routerLink]="['/', 'tags', tag]">
+        {{ tag }}
+      </a>
+    </div>
+  </div>
+</ng-container>

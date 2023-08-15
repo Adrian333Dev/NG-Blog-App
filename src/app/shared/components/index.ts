@@ -8,4 +8,4 @@ export * from './error-message/error-message.component';
 export * from './article/article.component';
 export * from './article-list/article-list.component';
 export * from './article-tags/article-tags.component';
-export * from './popular-tags/popular-tags.component';
+export * from '../../features/popular-tags/popular-tags.component';
