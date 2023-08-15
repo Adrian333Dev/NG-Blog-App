@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BannerComponent, PopularTagsComponent } from '@shared/components';
+import { BannerComponent } from '@shared/components';
 import { FeedComponent } from '@/features/feed/feed.component';
+import { PopularTagsComponent } from '../popular-tags/popular-tags.component';
 
 @Component({
   selector: 'app-global-feed',
@@ -10,6 +11,6 @@ import { FeedComponent } from '@/features/feed/feed.component';
   templateUrl: './global-feed.component.html',
   styleUrls: ['./global-feed.component.scss'],
 })
-export class GlobalFeedComponent {
+export class GlobalFeedComponent {  
   apiUrl = '/articles';
 }
